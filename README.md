@@ -10,10 +10,10 @@ We are training Watson to recognize the symptoms of various neurological disease
 Given the complex nature of this project and the numerous tools that we need to complete it, we will start with just a single disease and build the application up from there. 
 
 ## Watson Tools and Technologies Used
-Retrive and Rank
-Document Conversion
-ChatBot
-Text to Speech (?)
+#### Retrive and Rank
+#### Document Conversion
+#### ChatBot
+#### Text to Speech (?)
 
 ## Group Members
 Evan Honnold, Marissa Le Coz, Kevin Neilson
