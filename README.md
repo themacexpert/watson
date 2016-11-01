@@ -19,6 +19,9 @@ Text to Speech (?)
 Evan Honnold, Marissa Le Coz, Kevin Neilson
 
 ## Useful Links
-Project Home: http://www.cs.dartmouth.edu/~ccpalmer/teaching/cs89/Content/Assignments/TeamProject/index.html
-Pitch Proposal: https://docs.google.com/presentation/d/1vNerw0Ca_Dt6wVMydE4xqFTVZDUXeq3fVCVQctZGFys/edit#slide=id.p
+### Assignment Page:
+http://www.cs.dartmouth.edu/~ccpalmer/teaching/cs89/Content/Assignments/TeamProject/index.html
+
+### Pitch Proposal:
+https://docs.google.com/presentation/d/1vNerw0Ca_Dt6wVMydE4xqFTVZDUXeq3fVCVQctZGFys/edit#slide=id.p
 
