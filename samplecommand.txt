@@ -1,0 +1,1 @@
+curl -X POST -u "{USERNAME HERE}":"{PASSWORD HERE}" -F config="{\"conversion_target\":\"answer_units\"}" -F "file=@sample.pdf" "https://gateway.watsonplatform.net/document-conversion/api/v1/convert_document?version=2015-12-15"
