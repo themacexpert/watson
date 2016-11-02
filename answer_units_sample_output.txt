@@ -1,0 +1,62 @@
+{
+  "source_document_id":"",
+  "timestamp":"2016-11-02T03:50:49.904Z",
+  "media_type_detected":"application/pdf",
+  "metadata":[
+    {
+      "name":"Content-Type",
+      "content":"text/html; charset=UTF-8"
+    },
+    {
+      "name":"author",
+      "content":"Eva Luo"
+    },
+    {
+      "name":"publicationdate",
+      "content":"2015-12-04"
+    }
+  ],
+  "answer_units":[
+    {
+      "id":"e0965ba2-fd95-418b-9995-e56f899c1506",
+      "type":"h3",
+      "parent_id":"",
+      "title":"What is Watson?",
+      "direction":"ltr",
+      "content":[
+        {
+          "media_type":"text/plain",
+          "text":"Watson is an artificially intelligent computer system capable of answering questions  posed in natural language, developed in IBM's DeepQA project by a research team led  by principal investigator David Ferrucci. Watson was named after IBM's first CEO and  industrialist Thomas J. Watson. The computer system was specifically developed to  answer questions on the quiz show Jeopardy! In 2011, Watson competed on Jeopardy!  against former winners Brad Rutter and Ken Jennings. Watson received the first place  prize of $1 million."
+        }
+      ]
+    },
+    {
+      "id":"c620ba65-597a-47ff-b624-0fee8eea44bb",
+      "type":"h3",
+      "parent_id":"",
+      "title":"How did it Work?",
+      "direction":"ltr",
+      "content":[
+        {
+          "media_type":"text/plain",
+          "text":"Watson had access to 200 million pages of structured and unstructured content  consuming four terabytes of disk storage including the full text of Wikipedia, but was not  connected to the Internet during the game. For each clue, Watson's three most probable  responses were displayed on the television screen. Watson consistently outperformed  its human opponents on the game's signaling device, but had trouble responding to a  few categories, notably those having short clues containing only a few words."
+        }
+      ]
+    },
+    {
+      "id":"1eaf4fcc-1a27-4531-89ae-bd9d231aa949",
+      "type":"h3",
+      "parent_id":"",
+      "title":"And then, what happened?",
+      "direction":"ltr",
+      "content":[
+        {
+          "media_type":"text/plain",
+          "text":"In   February   2013,   IBM  announced   that  Watson   software   system's   first   commercial application would be for utilization management decisions in lung cancer treatment at Memorial Sloan-Kettering Cancer Center in conjunction with health insurance company WellPoint. IBM Watson's former business chief Manoj Saxena says that 90% of nurses in the field who use Watson now follow its guidance."
+        }
+      ]
+    }
+  ],
+  "warnings":[
+
+  ]
