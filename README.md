@@ -16,7 +16,7 @@ Given the complex nature of this project and the numerous tools that we need to 
 #### Text to Speech (?)
 
 ## Group Members
-Evan Honnold, Marissa C. Le Coz, Kevin Neilson
+Evan Honnold, Marissa Le Coz, Kevin Neilson
 
 ## Useful Links
 ### Assignment Page:
