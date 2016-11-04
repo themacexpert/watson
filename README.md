@@ -1,5 +1,3 @@
-lololooolll
-
 # CS89 Watson Final Project
 As part of our Dartmouth College CS89 - Cognitive Computing with Watson Capstone Project, we are building a tool that allows Watson to recognize neurological diseases.
 
