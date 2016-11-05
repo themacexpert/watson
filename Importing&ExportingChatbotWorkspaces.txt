@@ -1,0 +1,18 @@
+HOW TO IMPORT/EXPORT CHATBOT WORKSPACES
+
+As in Assignment 2, go through Armin's conversation_expedited.pdf (which is in this repo), steps 1-21. In step 14, use neuro_workspace.json (which is in the training folder of ConversationMaster_expedited) instead of car_workspace.json.
+
+Here's a link on importing and exporting conversation workspaces: https://www.ibm.com/watson/developercloud/doc/conversation/create_workspace.shtml#import_export_workspace
+
+EXPORTING
+
+So, if you make changes to intents, entities, or dialogue, export with the "Download as JSON" option. This is on the Conversation workspaces page; there's a screenshot in that link above. Rename that JSON file as neuro_workspace.json. Then push to Github. 
+
+IMPORTING
+
+There does not appear to be a way to import to a pre-existing workspace. I think the easiest way to do this is by creating a new workspace (again, from that Conversation workspaces page). Instead of clicking "Create", click the little import icon to the right. There you are prompted to select a json file, which you've pulled from git! Then that workspace is in the state of what was on git! YAY
+
+LIMITS ON WORKSPACES
+
+You can only have 3 workspaces at once. That's fine, though, because you can just delete the old ones! 
+
