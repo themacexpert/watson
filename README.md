@@ -25,3 +25,5 @@ http://www.cs.dartmouth.edu/~ccpalmer/teaching/cs89/Content/Assignments/TeamProj
 ### Pitch Proposal:
 https://docs.google.com/presentation/d/1vNerw0Ca_Dt6wVMydE4xqFTVZDUXeq3fVCVQctZGFys/edit#slide=id.p
 
+### Diseases we are including support for in our project:
+https://docs.google.com/spreadsheets/d/1WMm8ffnh-tfUTHaogCEeZJ1gGDM_yvGZyGLhtSC40s4/edit?usp=sharing
