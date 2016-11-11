@@ -1,0 +1,73 @@
+Giant-cell arteritis
+From Wikipedia, the free encyclopedia
+Giant-cell arteritis
+Gray508.png
+The arteries of the face and scalp.
+Classification and external resources
+Specialty	rheumatology
+ICD-10	M31.5-M31.6
+ICD-9-CM	446.5
+OMIM	187360
+DiseasesDB	12938
+MedlinePlus	000448
+eMedicine	neuro/592
+Patient UK	Giant-cell arteritis
+MeSH	D013700
+[edit on Wikidata]
+Giant-cell arteritis (GCA), also called temporal arteritis, cranial arteritis, or Horton disease is an inflammatory disease of blood vessels most commonly involving large and medium arteries of the head, predominantly the branches of the external carotid artery. The most serious complication is occlusion of the ophthalmic artery, which is a branch of the internal carotid. It can create a medical emergency which can cause irreversible ischemia and blindness if not treated promptly. GCA is treated with glucocorticoids (steroids), which reduce the inflammation and prevent occlusion. No other drugs are effective or contribute to the effect of glucocorticoids.[1]
+GCA is a form of vasculitis. It typically causes inflammation of the network of small vessels (vasa vasorum) that supplies the larger arteries. GCA affects arteries of the head and neck, including the three arteries that branch out from the arch of the ascending aorta, and their branches—the thoracic aorta, the axillary arteries, the vertebral arteries, and further on in the head in the ophthalmic and external carotid arteries (the temporal and occipital arteries). It can cause occlusion of the arteries and ischemia.[1]
+GCA is diagnosed with biopsy of the temporal artery. While the clinical presentation, patient characteristics and blood test markers of inflammation can raise suspicion, only a temporal artery biopsy can give definite diagnosis. Some cases may not involve the temporal artery, and distinguishing between a false negative and the absence of GCA is difficult.[1]
+The terms "giant-cell arteritis" and "temporal arteritis" are sometimes used interchangeably, because of the frequent involvement of the temporal artery. However, it can involve other large vessels (such as the aorta in "giant-cell aortitis"[2]). Giant-cell arteritis of the temporal artery is referred to as "temporal arteritis," and is also known as "cranial arteritis" and "Horton's disease."[3]:840 The name (giant-cell arteritis) reflects the type of inflammatory cell involved[4] as seen on a biopsy.
+Contents  [hide] 
+1	Signs and symptoms
+1.1	Associated conditions
+2	Diagnosis
+2.1	Physical exam
+2.2	Laboratory tests
+2.3	Biopsy
+2.4	Imaging studies
+3	Mechanism
+4	Treatment
+5	References
+6	External links
+Signs and symptoms[edit]
+It is more common in women than in men by a ratio of 2:1 and more common in those of Northern European descent, as well as those residing at higher (northern/southern) latitudes. The mean age of onset is >55 years, and it is rare in those younger than 55 years of age.
+People present with:
+bruits
+fever
+headache[5]
+tenderness and sensitivity on the scalp
+jaw claudication (pain in jaw when chewing)
+tongue claudication (pain in tongue when chewing) and necrosis[6][7]
+reduced visual acuity (blurred vision)
+acute visual loss (sudden blindness)
+diplopia (double vision)
+acute tinnitus (ringing in the ears)
+polymyalgia rheumatica (in 50%)[8]
+The inflammation may affect blood supply to the eye; blurred vision or sudden blindness may occur. In 76% of cases involving the eye, the ophthalmic artery is involved causing arteritic anterior ischemic optic neuropathy.[9]
+Giant-cell arteritis may present with atypical or overlapping features.[10] Early and accurate diagnosis is important to prevent ischemic vision loss. Therefore, this condition is considered a medical emergency.[10]
+Associated conditions[edit]
+The Varicella-zoster virus antigen was found in 74% of temporal artery biopsies that were GCA-positive, suggesting that the VZV infection may trigger the inflammatory cascade.[11]
+The disorder may coexist (in a half of cases)[8] with polymyalgia rheumatica (PMR), which is characterized by sudden onset of pain and stiffness in muscles (pelvis, shoulder) of the body and is seen in the elderly. GCA and PMR are so closely linked that they are often considered to be different manifestations of the same disease process. Other diseases associated with temporal arteritis are systemic lupus erythematosus, rheumatoid arthritis, and severe infections.
+Giant-cell arteritis can involve branches of the aorta as well, leading to aortic aneurysm or dissection. For this reason, patients should be followed with serial chest X-rays.
+Diagnosis[edit]
+Physical exam[edit]
+Palpation of the head reveals prominent temporal arteries with or without pulsation.
+The temporal area may be tender.
+Decreased pulses may be found throughout the body
+Evidence of ischemia may be noted on fundal exam.
+Laboratory tests[edit]
+LFTs, liver function tests, are abnormal particularly raised ALP- alkaline phosphatase
+Erythrocyte sedimentation rate, an inflammatory marker, >60 mm/hour (normal 1–40 mm/hour).
+C-reactive protein, another inflammatory marker, may be elevated.
+Platelets may also be elevated.
+Biopsy[edit]
+
+Histopathology of giant cell vasculitis in a cerebral artery. Elastica-stain.
+The gold standard for diagnosing temporal arteritis is biopsy, which involves removing a small part of the vessel and examining it microscopically for giant cells infiltrating the tissue. Since the blood vessels are involved in a patchy pattern, there may be unaffected areas on the vessel and the biopsy might have been taken from these parts. Unilateral biopsy of a 1.5–3 cm length is 85-90% sensitive (1 cm is the minimum).[12] A negative result does not definitively rule out the diagnosis. Thus, currently biopsy is only considered confirmatory for the clinical diagnosis, or one of the diagnostic criteria.[7]
+Imaging studies[edit]
+Radiological examination of the temporal artery with ultrasound yields a halo sign. Contrast enhanced brain MRI and CT is generally negative in this disorder. Recent studies have shown that 3T MRI using super high resolution imaging and contrast injection can non-invasively diagnose this disorder with high specificity and sensitivity.[13]
+Mechanism[edit]
+The pathological mechanism seems to start when dendritic cells in the vessel wall recruit T cells and macrophages to form granulomatous infiltrates. T helper 17 cells involved with interleukin (IL) 6, IL-17 and IL-21 play a critical part; this pathway is suppressed with glucocorticoids.[1]
+Treatment[edit]
+Corticosteroids, typically high-dose prednisone (1 mg/kg/day), must be started as soon as the diagnosis is suspected (even before the diagnosis is confirmed by biopsy) to prevent irreversible blindness secondary to ophthalmic artery occlusion. Steroids do not prevent the diagnosis from later being confirmed by biopsy, although certain changes in the histology may be observed towards the end of the first week of treatment and are more difficult to identify after a couple of months.[14] The dose of prednisone is lowered after 2–4 weeks, and slowly tapered over 9–12 months. Tapering may require two or more years. Oral steroids are at least as effective as intravenous steroids,[15] except in the treatment of acute visual loss where intravenous steroids appear to offer significant benefit over oral steroids.[16] It is unclear if adding a small amount of aspirin is beneficial or not as it has not been studied.[17]
