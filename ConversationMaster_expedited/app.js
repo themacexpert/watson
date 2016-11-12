@@ -69,7 +69,7 @@ app.post( '/api/message', function(req, res) {
   }
   var payload = {
     workspace_id: workspace,
-    context: {},
+    context: { "symptoms":[] },
     input: {}
   };
   if ( req.body ) {
@@ -106,6 +106,10 @@ function updateMessage(res, input, data) {
 	symptomList = symptomList.concat(newSymptoms);
 	console.log(symptomList);
 	
+	// if there's a "no [more symptoms]" intent, then gather up the symptoms
+	// and make a call to the 
+	
+	
 	// not relevant to our project but keeping it for now in case
 	// there is any useful syntax:
   if(checkWeather(data)){
@@ -115,8 +119,6 @@ function updateMessage(res, input, data) {
       host: 'api.wunderground.com',
       path: path
     };
-
-	
 	
     http.get(options, function(resp){
       var chunkText = '';
