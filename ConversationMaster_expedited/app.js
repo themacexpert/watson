@@ -114,27 +114,25 @@ function updateMessage(res, input, data) {
 	// if there's a "no [more symptoms]" intent, then gather up the symptoms
 	// and make a call to the Retrieve and Rank API
 	if (hasIntent(data, "no")){
-		console.log("symptom list with duplicates: ");
-		console.log(symptomList);
 		symptomList = removeDuplicates(symptomList);
-		console.log("symptom list no duplicates: ");
-		console.log(symptomList);
-		
+
 		// generate a retrieve & rank query by combining all the symptoms:
+		//var collectionName = "neurological";
+		var collectionName = "example_collection";
 		var query = "";
 		for (var i = 0; i < symptomList.length; i++){
 			query += symptomList[i];
 			if (i < symptomList.length - 1)
 				query += " ";
 		}
-		console.log("retrieve & rank query: '" + query + "'");
+		console.log("retrieve & rank query: '" + query + "', collection: " + collectionName);
 		if (symptomList.length < 1)
 			console.log("Warning: request to Retrieve & Rank made with 0 symptoms!");
 		
 		var fullString = 'https://091d880c-9617-490f-a859-87a7c7b1b8ad:IhxEV2KTiY1B@'
 			+ 'gateway.watsonplatform.net/retrieve-and-rank/api/v1/solr_clusters/scc'
-			+ 'aa3604c_1f02_4567_8162_c15dfe749fdf/solr/example_collection/fcselect?'
-			+ 'ranker_id=c852c8x19-rank-3415&q=' + query + '?&wt=json&fl=id,title';
+			+ 'aa3604c_1f02_4567_8162_c15dfe749fdf/solr/' + collectionName + '/fcsel'
+			+ 'ect?ranker_id=c852c8x19-rank-3415&q='+ query +'?&wt=json&fl=id,title';
 		
 		// perform the Retrieve & Rank API call:
 		var https = require('https');
@@ -144,17 +142,28 @@ function updateMessage(res, input, data) {
 				chunkText+=chunk.toString('utf8');
 			});
 			resp.on('end', function(){
-				var mJSON = JSON.parse(chunkText);
-				if (!mJSON.response)
-					console.log("Error: the Retrieve & Rank HTTP request did not produce a valid JSON");
-				else {
-					if (mJSON.response.numFound == 0){
-						console.log("Error: the Retrieve & Rank request returned 0 documents! Here is the full R&R response:");
-						console.log(mJSON);
-						console.log("Here is the docs list: ");
+				var parseSuccess = Boolean(true);
+				var mJSON;
+				try {
+					mJSON = JSON.parse(chunkText);
+				} catch (err){
+					parseSuccess = Boolean(false);
+					console.log("Error parsing JSON response from Retrieve & Rank");
+					console.log(err.message);
+					console.log("Here is the R&R response that caused the problem:");
+					console.log(chunkText);
+				}
+				if (parseSuccess){
+					if (!mJSON.response)
+						console.log("Error: the Retrieve & Rank HTTP request did not produce a valid JSON");
+					else {
+						if (mJSON.response.numFound == 0){
+							console.log("Error: the Retrieve & Rank request returned 0 documents! Here is the full R&R response:");
+							console.log(mJSON);
+						}
+						else 
+							processJSON(res, data, mJSON);
 					}
-					else 
-						processJSON(res, data, mJSON);
 				}
 			});
 		});
@@ -260,10 +269,11 @@ function hasIntent(data, intentString){
  *		 edited Conversation response.
  */
  function processJSON(res, data, json){
-	console.log("processing json response");
-	console.log(json.response.docs[0]);	
-	console.log("the complete response object:");
-	console.log(json);
+	console.log("---processing json response---");
+	for (var i = 0; i < json.response.docs.length; i++){
+		console.log("document #" +i);
+		console.log(json.response.docs[0]);	
+	}
  }
 
 
