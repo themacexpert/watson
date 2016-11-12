@@ -90,6 +90,9 @@ app.post( '/api/message', function(req, res) {
   } );
 } );
 
+
+var permanentSymptomList = new Array();
+
 /**
  * Updates the response text using the intent confidence
  * @param  {Object} input The request to the Conversation service
@@ -97,6 +100,65 @@ app.post( '/api/message', function(req, res) {
  * @return {Object}          The response with the updated message
  */
 function updateMessage(res, input, data) {
+
+	// extract symptoms 
+	var newSymptoms = extractSymptomList(data);
+	permanentSymptomList = permanentSymptomList.concat(newSymptoms);
+	console.log("Current symptoms list: " + permanentSymptomList);
+	
+	/** use one of these two lines depending on which way 
+	of keeping track of symptoms we're using**/
+	var symptomList = permanentSymptomList;
+	//var symptomList = data.context.symptoms;
+	
+	// if there's a "no [more symptoms]" intent, then gather up the symptoms
+	// and make a call to the Retrieve and Rank API
+	if (hasIntent(data, "no")){
+		console.log("symptom list with duplicates: ");
+		console.log(symptomList);
+		symptomList = removeDuplicates(symptomList);
+		console.log("symptom list no duplicates: ");
+		console.log(symptomList);
+		
+		// generate a retrieve & rank query by combining all the symptoms:
+		var query = "";
+		for (var i = 0; i < symptomList.length; i++){
+			query += symptomList[i] + " ";
+		}
+		console.log("retrieve & rank query: '" + query + "'");
+		if (symptomList.length < 1)
+			console.log("Warning: request to Retrieve & Rank made with 0 symptoms!");
+		
+		var fullString = 'https://091d880c-9617-490f-a859-87a7c7b1b8ad:IhxEV2KTiY1B@'
+			+ 'gateway.watsonplatform.net/retrieve-and-rank/api/v1/solr_clusters/scc'
+			+ 'aa3604c_1f02_4567_8162_c15dfe749fdf/solr/example_collection/fcselect?'
+			+ 'ranker_id=c852c8x19-rank-3415&q=' + query + '?&wt=json&fl=id,title';
+		
+		// perform the Retrieve & Rank API call:
+		var https = require('https');
+		https.get(fullString, function(resp){
+			var chunkText = '';
+			resp.on('data', function(chunk){
+				chunkText+=chunk.toString('utf8');
+			});
+			resp.on('end', function(){
+				var mJSON = JSON.parse(chunkText);
+				if (!mJSON.response)
+					console.log("Error: the Retrieve & Rank HTTP request did not produce a valid JSON");
+				else {
+					if (mJSON.response.numFound == 0)
+						console.log("Error: the Retrieve & Rank request returned 0 documents!");
+					else 
+						processJSON(res, data, mJSON);
+				}
+			});
+		});
+	}	
+	
+	
+	
+	// not relevant to our project but keeping it for now in case
+	// there is any useful syntax:
   if(checkWeather(data)){
     var path = getLocationURL(data.context.long, data.context.lat);
 
@@ -104,7 +166,7 @@ function updateMessage(res, input, data) {
       host: 'api.wunderground.com',
       path: path
     };
-
+	
     http.get(options, function(resp){
       var chunkText = '';
       resp.on('data', function(chunk){
@@ -138,6 +200,71 @@ function updateMessage(res, input, data) {
     return res.json(data);
   }
 }
+
+var key = "3a99ee3e5300e56f";
+
+
+/** [EH] Gets a list of all the symptoms from the data object
+ *		(returns an empty list if there aren't any) 
+ */	
+function extractSymptomList(data){
+	var symptoms = new Array();
+	for (var i = 0; i < data.entities.length; i++) {
+		symptoms.push(data.entities[i].value);
+	}
+	return symptoms;
+}
+
+/** [EH] Helper method for removing duplicates from a list 
+ */ 
+function removeDuplicates(list){
+	var listNoDuplicates = new Array();
+	for (var i = 0; i < list.length; i++){
+		var inListAlready = Boolean(false);
+		for (var j = 0; j < listNoDuplicates.length; j++){
+			if (list[i] === listNoDuplicates[j]){
+				inListAlready = Boolean(true);
+			}
+		}
+		if (!inListAlready){
+			listNoDuplicates.push(list[i]);
+		}
+	}
+	return listNoDuplicates;
+}
+
+/** [EH] Given a "data" JSON object, checks whether its intent list
+ *		 contains an intent of the given name 
+ */
+function hasIntent(data, intentString){
+	if (data.intents){
+		for (var i = 0; i < data.intents.length; i++){
+			if (data.intents[i].intent === intentString){
+				return true;
+			}
+		}
+		return false;
+	}
+	else {
+		console.log("hasIntent error - data object has no intent field");
+	}
+}
+
+/** [EH] Given a valid JSON response from Retrieve & Rank, extract
+ *		 the important information and use res & data to return an
+ *		 edited Conversation response.
+ */
+ function processJSON(res, data, json){
+	console.log("processing json response");
+	console.log(json.response.docs[0]);	
+	console.log("the complete response object:");
+	console.log(json);
+ }
+
+
+/** unnecessary stuff from Arman's project: **/
+
+
 function checkWeather(data){
   return data.intents && data.intents.length > 0 && data.intents[0].intent === 'weather'
     && data.entities && data.entities.length > 0 && data.entities[0].entity === 'day';
@@ -162,8 +289,8 @@ function getLocationURL(lat, long){
   }
 };
 
-var key = "3a99ee3e5300e56f";
 
+/** from Arman's project...God knows what this stuff does **/
 
 
 if ( cloudantUrl ) {
