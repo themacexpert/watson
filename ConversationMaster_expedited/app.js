@@ -117,8 +117,8 @@ function updateMessage(res, input, data) {
 		symptomList = removeDuplicates(symptomList);
 
 		// generate a retrieve & rank query by combining all the symptoms:
-		//var collectionName = "neurological";
-		var collectionName = "example_collection";
+		var collectionName = "Neurological";
+		//var collectionName = "example_collection";
 		var query = "";
 		for (var i = 0; i < symptomList.length; i++){
 			query += symptomList[i];
@@ -269,7 +269,7 @@ function hasIntent(data, intentString){
  *		 edited Conversation response.
  */
  function processJSON(res, data, json){
-	console.log("---processing json response---");
+	console.log("---processing json response: " + json.response.numFound + " documents returned");
 	for (var i = 0; i < json.response.docs.length; i++){
 		console.log("document #" +i);
 		console.log(json.response.docs[0]);	
