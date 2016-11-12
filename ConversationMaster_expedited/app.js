@@ -123,7 +123,9 @@ function updateMessage(res, input, data) {
 		// generate a retrieve & rank query by combining all the symptoms:
 		var query = "";
 		for (var i = 0; i < symptomList.length; i++){
-			query += symptomList[i] + " ";
+			query += symptomList[i];
+			if (i < symptomList.length - 1)
+				query += " ";
 		}
 		console.log("retrieve & rank query: '" + query + "'");
 		if (symptomList.length < 1)
@@ -146,8 +148,11 @@ function updateMessage(res, input, data) {
 				if (!mJSON.response)
 					console.log("Error: the Retrieve & Rank HTTP request did not produce a valid JSON");
 				else {
-					if (mJSON.response.numFound == 0)
-						console.log("Error: the Retrieve & Rank request returned 0 documents!");
+					if (mJSON.response.numFound == 0){
+						console.log("Error: the Retrieve & Rank request returned 0 documents! Here is the full R&R response:");
+						console.log(mJSON);
+						console.log("Here is the docs list: ");
+					}
 					else 
 						processJSON(res, data, mJSON);
 				}
