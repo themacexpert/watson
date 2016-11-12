@@ -69,7 +69,7 @@ app.post( '/api/message', function(req, res) {
   }
   var payload = {
     workspace_id: workspace,
-    context: {},
+    context: { "symptoms_list":[] },
     input: {}
   };
   if ( req.body ) {
