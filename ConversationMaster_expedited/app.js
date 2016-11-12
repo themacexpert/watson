@@ -91,7 +91,7 @@ app.post( '/api/message', function(req, res) {
 } );
 
 
-var symptomList = new Array();
+var permanentSymptomList = new Array();
 
 /**
  * Updates the response text using the intent confidence
@@ -103,12 +103,23 @@ function updateMessage(res, input, data) {
 
 	// extract symptoms 
 	var newSymptoms = extractSymptomList(data);
-	symptomList = symptomList.concat(newSymptoms);
-	console.log(symptomList);
+	permanentSymptomList = permanentSymptomList.concat(newSymptoms);
+	console.log(permanentSymptomList);
+	
+	/** use one of these two lines depending on which way 
+	of keeping track of symptoms we're using**/
+	var symptomList = permanentSymptomList;
+	//var symptomList = data.context.symptoms;
 	
 	// if there's a "no [more symptoms]" intent, then gather up the symptoms
-	// and make a call to the 
-	
+	// and make a call to the Retrieve and Rank API
+	if (hasIntent(data, "no")){
+		console.log("symptom list with duplicates: ");
+		console.log(symptomList);
+		symptomList = removeDuplicates(symptomList);
+		console.log("symptom list no duplicates: ");
+		console.log(symptomList);
+	}	
 	
 	// not relevant to our project but keeping it for now in case
 	// there is any useful syntax:
@@ -182,7 +193,6 @@ var key = "3a99ee3e5300e56f";
 
 /** [EH] Gets a list of all the symptoms from the data object
 		(returns an empty list if there aren't any) **/
-
 function extractSymptomList(data){
 	var symptoms = new Array();
 	for (var i = 0; i < data.entities.length; i++) {
@@ -190,6 +200,44 @@ function extractSymptomList(data){
 	}
 	return symptoms;
 }
+
+/** [EH] Helper method for removing duplicates from a list **/
+function removeDuplicates(list){
+	var listNoDuplicates = new Array();
+	for (var i = 0; i < list.length; i++){
+		var inListAlready = Boolean(false);
+		for (var j = 0; j < listNoDuplicates.length; j++){
+			if (list[i] === listNoDuplicates[j]){
+				inListAlready = Boolean(true);
+			}
+		}
+		if (!inListAlready){
+			listNoDuplicates.push(list[i]);
+		}
+	}
+	return listNoDuplicates;
+}
+
+/** [EH] Given a "data" JSON object, checks whether its intent list
+		 contains an intent of the given name **/
+
+function hasIntent(data, intentString){
+	if (data.intents){
+		for (var i = 0; i < data.intents.length; i++){
+			if (data.intents[i].intent === intentString){
+				return true;
+			}
+		}
+		return false;
+	}
+	else {
+		console.log("hasIntent error - data object has no intent field");
+	}
+}
+
+
+/** from Arman's project...God knows what this stuff does **/
+
 
 if ( cloudantUrl ) {
   // If logging has been enabled (as signalled by the presence of the cloudantUrl) then the
