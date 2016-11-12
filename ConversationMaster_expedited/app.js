@@ -90,6 +90,9 @@ app.post( '/api/message', function(req, res) {
   } );
 } );
 
+
+var symptomList = new Array();
+
 /**
  * Updates the response text using the intent confidence
  * @param  {Object} input The request to the Conversation service
@@ -97,6 +100,14 @@ app.post( '/api/message', function(req, res) {
  * @return {Object}          The response with the updated message
  */
 function updateMessage(res, input, data) {
+
+	// extract symptoms 
+	var newSymptoms = extractSymptomList(data);
+	symptomList = symptomList.concat(newSymptoms);
+	console.log(symptomList);
+	
+	// not relevant to our project but keeping it for now in case
+	// there is any useful syntax:
   if(checkWeather(data)){
     var path = getLocationURL(data.context.long, data.context.lat);
 
@@ -105,6 +116,8 @@ function updateMessage(res, input, data) {
       path: path
     };
 
+	
+	
     http.get(options, function(resp){
       var chunkText = '';
       resp.on('data', function(chunk){
@@ -165,6 +178,16 @@ function getLocationURL(lat, long){
 var key = "3a99ee3e5300e56f";
 
 
+/** [EH] Gets a list of all the symptoms from the data object
+		(returns an empty list if there aren't any) **/
+
+function extractSymptomList(data){
+	var symptoms = new Array();
+	for (var i = 0; i < data.entities.length; i++) {
+		symptoms.push(data.entities[i].value);
+	}
+	return symptoms;
+}
 
 if ( cloudantUrl ) {
   // If logging has been enabled (as signalled by the presence of the cloudantUrl) then the
