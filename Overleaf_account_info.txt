@@ -1,0 +1,12 @@
+Overleaf is an online LaTeX editor that allows you to create LaTeX
+documents without installing a program on your computer. It's also
+a good way for the three of us to collaborate on the same document.
+
+I have created a shared Overleaf account for our group. Here are 
+the credentials:
+
+account name: KMEcs89group
+password: evanmelissakevin
+email: ehonnold@gmail.com
+
+Let me know if you have any questions about how to use LaTeX.
