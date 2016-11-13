@@ -187,6 +187,15 @@ function updateMessage(res, input, data) {
 	}	
 	// if there's no "no [more symptoms]" intent:
 	else {
+		console.log("got into the statement");
+		var text = "" + input.input.text;
+		if (text.includes("Fuck") || text.includes("fuck") || text.includes("shit")){
+			console.log("looks like the user just cursed");
+			data.output.text = "It's going to be fine. Sooner or later, we all die :)";
+		}
+		else if (text.includes("asshole")){
+			data.output.text = "You and your physician may also want to look into: Anger Management Disorders";
+		}
 		return res.json(data);
 	}
 }
