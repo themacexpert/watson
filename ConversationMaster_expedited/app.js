@@ -157,24 +157,30 @@ function updateMessage(res, input, data) {
 				}
 				if (parseSuccess){
 					if (!mJSON.response)
-						console.log("Error: the Retrieve & Rank HTTP request did not produce a valid JSON");
+						console.log("Error: the Retrieve & Rank HTTP request "
+						+"did not produce a valid JSON");
 					else {
 						if (mJSON.response.numFound == 0){
-							console.log("Warning: the Retrieve & Rank request returned 0 documents for the query");
-							data.output.text = "We did not find any diseases that were mentioned in conjunction with those symptoms.";
+							console.log("Warning: the Retrieve & Rank request " 
+							+ "returned 0 documents for the query");
+							data.output.text = "We did not find any diseases "
+							+"that were mentioned in conjunction with those symptoms.";
 							return res.json(data);
 						}
 						else {
 							var disorders = processJSON(mJSON);
 							var insertionMarker = "<insert parsed JSON response here>";
 							var currResponse = data.output.text;
-							var newResponse = currResponse.join('').replace(insertionMarker, disorders);
+							var newResponse = currResponse.join('')
+								.replace(insertionMarker, disorders);
 							// make sure the substitution was made
 							if (currResponse === newResponse){
-								console.log("error - was unable to find marker '" + insertionMarker + "' in the response");
+								console.log("error - was unable to find marker '" 
+								+ insertionMarker + "' in the response");
 							}
 							else {
-								console.log("added the symptom list to the conversation response successfully");
+								console.log("added the symptom list to the conversation "
+								+"response successfully");
 							}
 							// update the conversation response
 							data.output.text = newResponse;
@@ -187,14 +193,16 @@ function updateMessage(res, input, data) {
 	}	
 	// if there's no "no [more symptoms]" intent:
 	else {
-		console.log("got into the statement");
+	
+		// amusing responses to curse words:
 		var text = "" + input.input.text;
 		if (text.includes("Fuck") || text.includes("fuck") || text.includes("shit")){
 			console.log("looks like the user just cursed");
 			data.output.text = "It's going to be fine. Sooner or later, we all die :)";
 		}
-		else if (text.includes("asshole")){
-			data.output.text = "You and your physician may also want to look into: Anger Management Disorders";
+		else if (text.includes("ass")){
+			data.output.text = "You and your physician may also want "
+			+"to look into: Anger Management Disorders";
 		}
 		return res.json(data);
 	}
@@ -253,7 +261,8 @@ function hasIntent(data, intentString){
  *		 the important information.
  */
  function processJSON(json){
-	console.log("---processing json response: " + json.response.numFound + " documents returned");
+	console.log("---processing json response: "
+		+ json.response.numFound + " documents returned");
 	var titleList = new Array();
 	for (var i = 0; i < json.response.docs.length; i++){
 		titleList.push("" + json.response.docs[i].title);
