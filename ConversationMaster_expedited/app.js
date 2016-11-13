@@ -117,8 +117,10 @@ function updateMessage(res, input, data) {
 		symptomList = removeDuplicates(symptomList);
 
 		// generate a retrieve & rank query by combining all the symptoms:
-		var collectionName = "Neurological";
+		//var collectionName = "Neurological";
 		//var collectionName = "example_collection";
+		var collectionName = "neuro_collection";
+		var rankerID = "54922ax21-rank-20";
 		var query = "";
 		for (var i = 0; i < symptomList.length; i++){
 			query += symptomList[i];
@@ -132,7 +134,7 @@ function updateMessage(res, input, data) {
 		var fullString = 'https://091d880c-9617-490f-a859-87a7c7b1b8ad:IhxEV2KTiY1B@'
 			+ 'gateway.watsonplatform.net/retrieve-and-rank/api/v1/solr_clusters/scc'
 			+ 'aa3604c_1f02_4567_8162_c15dfe749fdf/solr/' + collectionName + '/fcsel'
-			+ 'ect?ranker_id=c852c8x19-rank-3415&q='+ query +'?&wt=json&fl=id,title';
+			+ 'ect?ranker_id=' + rankerID +'&q='+ query +'?&wt=json&fl=id,title';
 		
 		// perform the Retrieve & Rank API call:
 		var https = require('https');
@@ -155,23 +157,30 @@ function updateMessage(res, input, data) {
 				}
 				if (parseSuccess){
 					if (!mJSON.response)
-						console.log("Error: the Retrieve & Rank HTTP request did not produce a valid JSON");
+						console.log("Error: the Retrieve & Rank HTTP request "
+						+"did not produce a valid JSON");
 					else {
 						if (mJSON.response.numFound == 0){
-							console.log("Error: the Retrieve & Rank request returned 0 documents! Here is the full R&R response:");
-							console.log(mJSON);
+							console.log("Warning: the Retrieve & Rank request " 
+							+ "returned 0 documents for the query");
+							data.output.text = "We did not find any diseases "
+							+"that were mentioned in conjunction with those symptoms.";
+							return res.json(data);
 						}
 						else {
-							var disorders = processJSON(res, data, mJSON);
+							var disorders = processJSON(mJSON);
 							var insertionMarker = "<insert parsed JSON response here>";
 							var currResponse = data.output.text;
-							var newResponse = currResponse.join('').replace(insertionMarker, disorders);
+							var newResponse = currResponse.join('')
+								.replace(insertionMarker, disorders);
 							// make sure the substitution was made
 							if (currResponse === newResponse){
-								console.log("error - was unable to find marker '" + insertionMarker + "' in the response");
+								console.log("error - was unable to find marker '" 
+								+ insertionMarker + "' in the response");
 							}
 							else {
-								console.log("added the symptom list to the conversation response successfully");
+								console.log("added the symptom list to the conversation "
+								+"response successfully");
 							}
 							// update the conversation response
 							data.output.text = newResponse;
@@ -184,6 +193,17 @@ function updateMessage(res, input, data) {
 	}	
 	// if there's no "no [more symptoms]" intent:
 	else {
+	
+		// amusing responses to curse words:
+		var text = "" + input.input.text;
+		if (text.includes("Fuck") || text.includes("fuck") || text.includes("shit")){
+			console.log("looks like the user just cursed");
+			data.output.text = "It's going to be fine. Sooner or later, we all die :)";
+		}
+		else if (text.includes("ass")){
+			data.output.text = "You and your physician may also want "
+			+"to look into: Anger Management Disorders";
+		}
 		return res.json(data);
 	}
 }
@@ -238,19 +258,31 @@ function hasIntent(data, intentString){
 }
 
 /** [EH] Given a valid JSON response from Retrieve & Rank, extract
- *		 the important information and use res & data to return an
- *		 edited Conversation response.
+ *		 the important information.
  */
- function processJSON(res, data, json){
-	console.log("---processing json response: " + json.response.numFound + " documents returned");
+ function processJSON(json){
+	console.log("---processing json response: "
+		+ json.response.numFound + " documents returned");
+	var titleList = new Array();
 	for (var i = 0; i < json.response.docs.length; i++){
-		console.log("document #" +i);
-		console.log(json.response.docs[0]);	
+		titleList.push("" + json.response.docs[i].title);
 	}
-	var disorderList = " [--a list of disorders will be added here once the "
-	+ "Retrieve & Rank service returns the appropriate information--]";
-	
-	return disorderList;
+	var disorderList = removeDuplicates(titleList);
+	var listString = "";
+	for (var i = 0; i < disorderList.length; i++){
+		listString += " " + disorderList[i];
+		if (i < disorderList.length - 2)
+			listString += ",";
+		else if (i == disorderList.length - 2){ // after second-to-last item
+			if (i == 0){ // two-item list
+				listString += " and";
+			}
+			else if (i > 0){
+				listString += ", and";
+			}
+		}		
+	}
+	return listString;
  }
 
 
