@@ -144,7 +144,7 @@ div {
   right: 0;
   height: 0.375rem;
   width: 0.5rem;
-  background: #1cb3a0;
+  background: #E79B45;
 }
 
 .from-user .message-inner:after {
@@ -177,7 +177,7 @@ div {
 
 .from-watson.latest.top p:before {
   content: ".";
-  color: #9855D4;
+  color: #E79B45;
   background-image: url("../img/marker_image.png");
   background-size: 0.3125rem 1.3125rem;
   position: absolute;
@@ -254,13 +254,13 @@ input:-moz-placeholder {
   color: #fff;
   overflow-x: auto;
 
-  width: 45%;
+  width: 0%;
   max-width: 32.0625rem;
   min-width: 29.6875rem;
 }
 
 #payload-column.full {
-  width: 100%;
+  width: 0%;
   max-width: none;
   min-width: initial;
 }
