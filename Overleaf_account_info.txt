@@ -6,7 +6,7 @@ I have created a shared Overleaf account for our group. Here are
 the credentials:
 
 account name: KMEcs89group
-password: evanmelissakevin
+password:<see slack> 
 email: ehonnold@gmail.com
 
 Let me know if you have any questions about how to use LaTeX.
