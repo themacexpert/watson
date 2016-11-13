@@ -1,0 +1,109 @@
+kaleSolrCluster
+
+solrClusterID = sccaa3604c_1f02_4567_8162_c15dfe749fdf
+
+ranker_id = c852c8x19-rank-3415
+
+
+
+curl -X POST -u "091d880c-9617-490f-a859-87a7c7b1b8ad":"IhxEV2KTiY1B" "https://gateway.watsonplatform.net/retrieve-and-rank/api/v1/solr_clusters" -d ""
+
+
+
+$ curl -u "091d880c-9617-490f-a859-87a7c7b1b8ad":"IhxEV2KTiY1B" "https://gateway.watsonplatform.net/retrieve-and-rank/api/v1/solr_clusters/sccaa3604c_1f02_4567_8162_c15dfe749fdf"
+
+
+
+$ curl -X POST -H "Content-Type: application/zip" -u "091d880c-9617-490f-a859-87a7c7b1b8ad":"IhxEV2KTiY1B" "https://gateway.watsonplatform.net/retrieve-and-rank/api/v1/solr_clusters/sccaa3604c_1f02_4567_8162_c15dfe749fdf/config/example_config" --data-binary @/Users/Kevin\ 1/Downloads/cranfield-solr-config.zip
+
+
+curl -X POST -H "onplatform.net/retrieve-and-rank/api/v1/solr_clusters/sccaa3604c_1f02_4567_8162_c15dfe749fdf/config/example_config" --data-binary @/Users/Kevin\ 1/Downloads/cranfield-solr-config.zip
+
+
+$ curl -X POST -u "091d880c-9617-490f-a859-87a7c7b1b8ad":"IhxEV2KTiY1B" "https://gateway.watsonplatform.net/retrieve-and-rank/api/v1/solr_clusters/sccaa3604c_1f02_4567_8162_c15dfe749fdf/solr/admin/collections" -d "action=CREATE&name=example_collection&collection.configName=example_config"
+
+
+Upload Data to the collection
+$ curl -X POST -H "Content-Type: application/json" -u "091d880c-9617-490f-a859-87a7c7b1b8ad":"IhxEV2KTiY1B" "https://gateway.watsonplatform.net/retrieve-and-rank/api/v1/solr_clusters/sccaa3604c_1f02_4567_8162_c15dfe749fdf/solr/example_collection/update" --data-binary @/Users/Kevin\ 1/Downloads/cranfield-data.json
+
+
+$ python ./train.py -u 091d880c-9617-490f-a859-87a7c7b1b8ad:IhxEV2KTiY1B -i /Users/Kevin\ 1/Downloads/cranfield-gt.csv -c sccaa3604c_1f02_4567_8162_c15dfe749fdf -x example_collection -n "example_ranker"
+
+
+Retrieve some answers (UNRANKED)
+https://091d880c-9617-490f-a859-87a7c7b1b8ad:IhxEV2KTiY1B@gateway.watsonplatform.net/retrieve-and-rank/api/v1/solr_clusters/sccaa3604c_1f02_4567_8162_c15dfe749fdf/solr/example_collection/select?q=what is the basic mechanism of the transonic aileron buzz&wt=json&fl=id,title
+
+Retrieve Status of the Ranker:
+$ curl -u "091d880c-9617-490f-a859-87a7c7b1b8ad":"IhxEV2KTiY1B" "https://gateway.watsonplatform.net/retrieve-and-rank/api/v1/rankers/c852c8x19-rank-3415"
+
+
+Query (USING THE COMPLETED RANKER)
+https://091d880c-9617-490f-a859-87a7c7b1b8ad:IhxEV2KTiY1B@gateway.watsonplatform.net/retrieve-and-rank/api/v1/solr_clusters/sccaa3604c_1f02_4567_8162_c15dfe749fdf/solr/example_collection/fcselect?ranker_id=c852c8x19-rank-3415&q=what is the basic mechanism of the transonic aileron buzz&wt=json&fl=id,title
+
+
+Document Conversion Credentials
+{
+  "url": "https://gateway.watsonplatform.net/document-conversion/api",
+  "password": "duULlaMwnB0A",
+  "username": "7fea4fc2-8f74-4f84-b597-99008c73d028"
+}
+
+curl -X POST -u "7fea4fc2-8f74-4f84-b597-99008c73d028":"duULlaMwnB0A" -F config="{\"conversion_target\":\"answer_units\"}" -F file=@sample.pdf "https://gateway.watsonplatform.net/document-conversion/api/v1/convert_document?version=2015-12-15"
+
+ADD ITEMS TO THE CORPUS--
+$ curl -X POST -H "Content-Type: application/json" -u "091d880c-9617-490f-a859-87a7c7b1b8ad":"IhxEV2KTiY1B" "https://gateway.watsonplatform.net/retrieve-and-rank/api/v1/solr_clusters/sccaa3604c_1f02_4567_8162_c15dfe749fdf/solr/Neurological/update" --data-binary @/Users/Kevin\ 1/Downloads/sample5.json
+
+
+$ curl -u "091d880c-9617-490f-a859-87a7c7b1b8ad":"IhxEV2KTiY1B" "https://gateway.watsonplatform.net/retrieve-and-rank/api/v1/solr_clusters/sccaa3604c_1f02_4567_8162_c15dfe749fdf"
+
+
+curl -X POST -H "Content-Type: application/zip" -u "091d880c-9617-490f-a859-87a7c7b1b8ad":"IhxEV2KTiY1B" "https://gateway.watsonplatform.net/retrieve-and-rank/api/v1/solr_clusters/sccaa3604c_1f02_4567_8162_c15dfe749fdf/config/neuro" --data-binary @/Users/Kevin\ 1/Downloads/cranfield-solr-config.zip
+
+curl -X POST -u "091d880c-9617-490f-a859-87a7c7b1b8ad":"IhxEV2KTiY1B" "https://gateway.watsonplatform.net/retrieve-and-rank/api/v1/solr_clusters/sccaa3604c_1f02_4567_8162_c15dfe749fdf/solr/admin/collections" -d "action=CREATE&name=neuro_collection&collection.configName=neuro
+
+curl -X POST -H "Content-Type: application/json" -u "091d880c-9617-490f-a859-87a7c7b1b8ad":"IhxEV2KTiY1B" "https://gateway.watsonplatform.net/retrieve-and-rank/api/v1/solr_clusters/sccaa3604c_1f02_4567_8162_c15dfe749fdf/solr/neuro_collection/update" --data-binary @/Users/Kevin\ 1/Downloads/completenew.json
+
+python ./train.py -u 091d880c-9617-490f-a859-87a7c7b1b8ad:IhxEV2KTiY1B -i /Users/Kevin\ 1/Downloads/neuro-gt.csv -c sccaa3604c_1f02_4567_8162_c15dfe749fdf -x neuro_collection -n "neuro_ranker"
+
+RANKER ID for New Collection: 
+c852c8x19-rank-3481
+{"ranker_id":"c852c8x19-rank-3481","name":"neuro_ranker","created":"2016-11-12T19:33:50.430Z","url":"https://gateway.watsonplatform.net/retrieve-and-rank/api/v1/rankers/c852c8x19-rank-3481","status":"Training","status_description":"The ranker instance is in its training phase, not yet ready to accept rank requests"}
+
+Retrieve Status of the Ranker:
+$ curl -u "091d880c-9617-490f-a859-87a7c7b1b8ad":"IhxEV2KTiY1B" "https://gateway.watsonplatform.net/retrieve-and-rank/api/v1/rankers/c852c8x19-rank-3481"
+
+Delete a Ranker
+$ curl -X DELETE -u "091d880c-9617-490f-a859-87a7c7b1b8ad":"IhxEV2KTiY1B" "https://gateway.watsonplatform.net/retrieve-and-rank/api/v1/rankers/c852c8x19-rank-3481"
+
+New Ranker ID - c852bax18-rank-3676
+{"ranker_id":"c852bax18-rank-3676","name":"neuro_ranker","created":"2016-11-12T20:13:20.830Z","url":"https://gateway.watsonplatform.net/retrieve-and-rank/api/v1/rankers/c852bax18-rank-3676","status":"Training","status_description":"The ranker instance is in its training phase, not yet ready to accept rank requests"}
+
+https://091d880c-9617-490f-a859-87a7c7b1b8ad:IhxEV2KTiY1B@gateway.watsonplatform.net/retrieve-and-rank/api/v1/solr_clusters/sccaa3604c_1f02_4567_8162_c15dfe749fdf/solr/neuro_collection/select?q=What are the symptoms of ALS?&wt=json&fl=id,title
+
+curl -u "091d880c-9617-490f-a859-87a7c7b1b8ad":"IhxEV2KTiY1B" "https://gateway.watsonplatform.net/retrieve-and-rank/api/v1/rankers/c852bax18-rank-3676"
+
+curl -X DELETE -u "091d880c-9617-490f-a859-87a7c7b1b8ad":"IhxEV2KTiY1B" "https://gateway.watsonplatform.net/retrieve-and-rank/api/v1/rankers/c852bax18-rank-3676"
+
+{"ranker_id":"54922ax21-rank-16","name":"neuro_ranker","created":"2016-11-12T20:46:44.476Z","url":"https://gateway.watsonplatform.net/retrieve-and-rank/api/v1/rankers/54922ax21-rank-16","status":"Training","status_description":"The ranker instance is in its training phase, not yet ready to accept rank requests"}
+
+curl -u "091d880c-9617-490f-a859-87a7c7b1b8ad":"IhxEV2KTiY1B" "https://gateway.watsonplatform.net/retrieve-and-rank/api/v1/rankers/54922ax21-rank-16"
+
+curl -X DELETE -u "091d880c-9617-490f-a859-87a7c7b1b8ad":"IhxEV2KTiY1B" "https://gateway.watsonplatform.net/retrieve-and-rank/api/v1/rankers/54922ax21-rank-16"
+
+{"ranker_id":"c852c8x19-rank-3487","name":"neuro_ranker","created":"2016-11-12T21:46:08.814Z","url":"https://gateway.watsonplatform.net/retrieve-and-rank/api/v1/rankers/c852c8x19-rank-3487","status":"Training","status_description":"The ranker instance is in its training phase, not yet ready to accept rank requests"}
+
+curl -u "091d880c-9617-490f-a859-87a7c7b1b8ad":"IhxEV2KTiY1B" "https://gateway.watsonplatform.net/retrieve-and-rank/api/v1/rankers/c852c8x19-rank-3487"
+
+https://091d880c-9617-490f-a859-87a7c7b1b8ad:IhxEV2KTiY1B@gateway.watsonplatform.net/retrieve-and-rank/api/v1/solr_clusters/sccaa3604c_1f02_4567_8162_c15dfe749fdf/solr/neuro_collection/fcselect?ranker_id=c852c8x19-rank-3487&q=what is the basic mechanism of the transonic aileron buzz&wt=json&fl=id,title
+
+curl -X POST -H "Content-Type: application/json" -u "091d880c-9617-490f-a859-87a7c7b1b8ad":"IhxEV2KTiY1B" "https://gateway.watsonplatform.net/retrieve-and-rank/api/v1/solr_clusters/sccaa3604c_1f02_4567_8162_c15dfe749fdf/solr/neuro_collection/update" --data-binary @/Users/Kevin\ 1/Downloads/completenew.json
+
+curl -X DELETE -u "091d880c-9617-490f-a859-87a7c7b1b8ad":"IhxEV2KTiY1B" "https://gateway.watsonplatform.net/retrieve-and-rank/api/v1/rankers/c852c8x19-rank-3487"
+
+python ./train.py -u 091d880c-9617-490f-a859-87a7c7b1b8ad:IhxEV2KTiY1B -i /Users/Kevin\ 1/Downloads/neuro-gt.csv -c sccaa3604c_1f02_4567_8162_c15dfe749fdf -x neuro_collection -n "neuro_ranker"
+
+Status
+curl -u "091d880c-9617-490f-a859-87a7c7b1b8ad":"IhxEV2KTiY1B" "https://gateway.watsonplatform.net/retrieve-and-rank/api/v1/rankers/54922ax21-rank-18"
+
+Query-
+https://091d880c-9617-490f-a859-87a7c7b1b8ad:IhxEV2KTiY1B@gateway.watsonplatform.net/retrieve-and-rank/api/v1/solr_clusters/sccaa3604c_1f02_4567_8162_c15dfe749fdf/solr/neuro_collection/fcselect?ranker_id=54922ax21-rank-18&q=what is the basic mechanism of the transonic aileron buzz&wt=json&fl=id,title

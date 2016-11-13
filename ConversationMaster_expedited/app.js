@@ -100,7 +100,7 @@ var permanentSymptomList = new Array();
  * @return {Object}          The response with the updated message
  */
 function updateMessage(res, input, data) {
-
+	
 	// extract symptoms 
 	var newSymptoms = extractSymptomList(data);
 	permanentSymptomList = permanentSymptomList.concat(newSymptoms);
@@ -161,58 +161,31 @@ function updateMessage(res, input, data) {
 							console.log("Error: the Retrieve & Rank request returned 0 documents! Here is the full R&R response:");
 							console.log(mJSON);
 						}
-						else 
-							processJSON(res, data, mJSON);
+						else {
+							var disorders = processJSON(res, data, mJSON);
+							var insertionMarker = "<insert parsed JSON response here>";
+							var currResponse = data.output.text;
+							var newResponse = currResponse.join('').replace(insertionMarker, disorders);
+							// make sure the substitution was made
+							if (currResponse === newResponse){
+								console.log("error - was unable to find marker '" + insertionMarker + "' in the response");
+							}
+							else {
+								console.log("added the symptom list to the conversation response successfully");
+							}
+							// update the conversation response
+							data.output.text = newResponse;
+							return res.json(data);
+						}
 					}
 				}
 			});
 		});
 	}	
-	
-	
-	
-	// not relevant to our project but keeping it for now in case
-	// there is any useful syntax:
-  if(checkWeather(data)){
-    var path = getLocationURL(data.context.long, data.context.lat);
-
-    var options = {
-      host: 'api.wunderground.com',
-      path: path
-    };
-	
-    http.get(options, function(resp){
-      var chunkText = '';
-      resp.on('data', function(chunk){
-        chunkText += chunk.toString('utf8');
-      });
-      resp.on('end', function(){
-        var chunkJSON = JSON.parse(chunkText);
-        var params = [];
-        if(chunkJSON.location) {
-          var when = data.entities[0].value;
-          params.push ( chunkJSON.location.city );
-          var forecast = null;
-          if ( when == 'today' ) {
-            forecast = chunkJSON.forecast.txt_forecast.forecastday[0].fcttext;
-          } else if ( when == 'tomorrow' ) {
-            forecast = chunkJSON.forecast.txt_forecast.forecastday[3].fcttext;
-          } else{
-            forecast = chunkJSON.forecast.txt_forecast.forecastday[0].fcttext;
-          }
-          params.push ( forecast );
-
-          data.output.text = replaceParams ( data.output.text, params );
-        }
-        return res.json(data);
-      });
-    }).on('error', function(e){
-      console.log("failure!");
-    });
-  }
-  else{
-    return res.json(data);
-  }
+	// if there's no "no [more symptoms]" intent:
+	else {
+		return res.json(data);
+	}
 }
 
 var key = "3a99ee3e5300e56f";
@@ -274,6 +247,10 @@ function hasIntent(data, intentString){
 		console.log("document #" +i);
 		console.log(json.response.docs[0]);	
 	}
+	var disorderList = " [--a list of disorders will be added here once the "
+	+ "Retrieve & Rank service returns the appropriate information--]";
+	
+	return disorderList;
  }
 
 
