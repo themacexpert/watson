@@ -19,7 +19,10 @@ Given the complex nature of this project and the numerous tools that we need to 
 Evan Honnold, Marissa Le Coz, Kevin Neilson
 
 ## Useful Links
-### Assignment Page:
+### Final Project Video
+https://drive.google.com/file/d/0B8fIGMTqnunoUEdmMG5OVUdxUTA/view?usp=sharing
+
+### Assignment Page (Link Broken):
 http://www.cs.dartmouth.edu/~ccpalmer/teaching/cs89/Content/Assignments/TeamProject/index.html
 
 ### Pitch Proposal:
